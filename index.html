@@ -45,23 +45,24 @@
             cursor: pointer;
         }
 
-        /* حاوية اللوجو الدائرية المحدثة والموزونة */
+        /* حاوية اللوجو الدائرية الموزونة لمنع أي انضغاط أو تشوه */
         .logo-circle {
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background-color: #fcfbfa;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-left: 12px;
-            position: relative;
-            padding: 2px;
+            overflow: hidden;
         }
 
-        .official-logo-svg {
-            width: 100%;
-            height: 100%;
+        /* تنسيق الصورة الرسمية لتملأ الدائرة بشكل مثالي ومتناسق */
+        .official-logo-img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
         }
 
         .brand-name {
@@ -181,7 +182,7 @@
             background-color: var(--accent-color);
         }
 
-        /* حاوية الأزرار الرسمية للتطبيقات الملونة بالأسفل */
+        /* حاوية أزرار السوشيال ميديا الملونة */
         .social-container {
             display: flex;
             justify-content: center;
@@ -207,7 +208,6 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
 
-        /* تنسيق ألوان الأيقونات الرسمية */
         .instagram {
             color: #fff;
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
@@ -291,28 +291,7 @@
     <header>
         <div class="logo-container" onclick="goToHome()">
             <div class="logo-circle">
-                <svg class="official-logo-svg" viewBox="0 0 100 100">
-                    <path d="M 18,52 A 32,32 0 1,1 82,52" fill="none" stroke="#c49f57" stroke-width="2.5" stroke-linecap="round"/>
-                    
-                    <path d="M 15,75 Q 50,71 85,75" fill="none" stroke="#291e1b" stroke-width="2.5" stroke-linecap="round"/>
-                    
-                    <path d="M 72,74 Q 74,66 77,58" fill="none" stroke="#291e1b" stroke-width="2"/>
-                    <path d="M 77,58 Q 72,56 68,59 M 77,58 Q 81,55 85,57 M 77,58 Q 75,53 73,49 M 77,58 Q 79,53 83,50" fill="none" stroke="#291e1b" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M 66,74 Q 65,71 63,72 M 66,74 Q 67,70 69,71 M 66,74 Q 66,69 66,70" fill="none" stroke="#291e1b" stroke-width="1.5"/>
-                    
-                    <path d="M 32,74 
-                             C 33,68 33,61 36,60 
-                             C 38,59 39,57 41,56 
-                             C 43,53 44,47 48,46 
-                             C 52,45 56,47 59,45 
-                             C 62,43 62,37 66,37 
-                             C 69,37 70,41 72,42 
-                             C 74,43 74,45 72,46 
-                             C 70,47 67,46 66,48 
-                             C 64,50 63,53 62,55 
-                             C 61,57 61,59 58,61
-                             L 59,74 L 56,74 L 56,66 L 51,66 L 50,74 L 47,74 L 48,63 L 42,63 L 39,74 L 36,74 L 39,59 L 30,60 Z" fill="#291e1b"/>
-                </svg>
+                <img src="logo.png" alt="The Nomad Logo" class="official-logo-img">
             </div>
             <span class="brand-name">The Nomad</span>
         </div>
