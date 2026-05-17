@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nomad KW | Desert Camp</title>
+    <style>
+        :root {
+            --bg-color: #f6efe4;       /* لون البيج الخلفية الرسمي */
+            --primary-color: #291e1b;  /* البني الداكن للشعار والنصوص */
+            --accent-color: #c49f57;   /* الذهبي للخطوط والأزرار */
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            padding-bottom: 60px;
+        }
+
+        header {
+            background-color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .camel-icon {
+            width: 50px;
+            height: 50px;
+            fill: var(--primary-color);
+            margin-left: 10px;
+        }
+
+        .brand-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .booking-btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(197, 160, 89, 0.3);
+        }
+
+        .booking-btn:hover {
+            transform: scale(1.05);
+            background-color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .accordion-item {
+            background-color: var(--white);
+            border: 1px solid rgba(195, 160, 89, 0.2);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .accordion-header {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--white);
+            user-select: none;
+        }
+
+        .accordion-header:hover {
+            background-color: #fcfbfa;
+            color: var(--accent-color);
+        }
+
+        .accordion-header::after {
+            content: '▼';
+            font-size: 12px;
+            color: var(--accent-color);
+        }
+
+        .accordion-item.active .accordion-header::after {
+            content: '▲';
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            line-height: 1.8;
+            font-size: 16px;
+            border-top: 0 solid transparent;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 1200px;
+            padding: 20px;
+            border-top: 1px solid #f0eae1;
+        }
+
+        .accordion-content ul {
+            list-style-type: none;
+        }
+
+        .accordion-content li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .accordion-content li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .copy-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+            color: #7a706e;
+            background-color: var(--white);
+            border-top: 1px solid #ede7dc;
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .admin-trigger {
+            color: #7a706e;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 15px;
+            display: inline-block;
+            font-size: 12px;
+        }
+
+        .admin-panel {
+            display: none;
+            background-color: var(--white);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background-color: var(--bg-color);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(195, 160, 89, 0.1);
+        }
+
+        .stat-card h4 {
+            font-size: 14px;
+            color: #7a706e;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container" onclick="goToHome()">
+            <svg class="camel-icon" viewBox="0 0 100 100">
+                <path d="M20,60 C25,55 30,45 35,45 C40,45 42,35 50,35 C58,35 60,48 68,45 C73,43 75,38 78,40 C80,42 80,48 76,52 C73,55 70,55 68,58 C65,61 63,65 62,68 C61,70 61,75 60,78 L57,78 L58,68 L48,68 L46,78 L43,78 L46,65 L36,65 L33,78 L30,78 L34,60 L24,60 Z"/>
+            </svg>
+            <span class="brand-name">The Nomad</span>
+        </div>
+        <a href="https://wa.me/965xxxxxxxx" target="_blank" class="booking-btn">للحجز 📅</a>
+    </header>
+
+    <div class="container">
+
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">📋 شروط وتعليمات المخيم</div>
+            <div class="accordion-content">
+                <ul id="rules-list">
+                    <li>نرجو المحافظة على نظافة المخيم والمرافق</li>
+                    <li>الالتزام بالهدوء واحترام المخيمات المجاورة</li>
+                    <li>يمنع دخول أشخاص غير مضافين بالحجز</li>
+                    <li>المحافظة على الأثاث والتجهيزات مسؤولية المستأجر</li>
+                    <li>أي تلفيات أو فقدان يتم تعويضها حسب الضرر</li>
+                    <li>الالتزام بوقت الدخول والخروج المحدد</li>
+                    <li>يمنع العبث بالكهرباء أو معدات السلامة</li>
+                    <li>استخدام مرافق المخيم يكون بشكل مسؤول وآمن</li>
+                    <li>يمنع ترك النفايات أو مخلفات الفحم بعد المغادرة</li>
+                    <li>الإدارة تحتفظ بحق إنهاء الحجز عند مخالفة التعليمات</li>
+                </ul>
+                <p style="margin-top: 15px; font-weight: bold; text-align: center;">نتمنى لكم إقامة ممتعة ووقتًا جميلًا في المخيم 🤍</p>
+                <button class="copy-btn" onclick="copyRules()">📋 نسخ القوانين</button>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">🏕️ وصف المخيم</div>
+            <div class="accordion-content">
+                <p style="margin-bottom: 15px; font-weight: bold;">مخيم مرتب ومجهز لجلسات البر والاستمتاع بالأجواء ✨</p>
+                <ul>
+                    <li>جلسة خارجية واسعة ومريحة</li>
+                    <li>خيمة رئيسية كبيرة مناسبة للجمعات</li>
+                    <li>خيمة إضافية بحجم أصغر للخصوصية أو النوم</li>
+                    <li>حمام ومغاسل مجهزة</li>
+                    <li>مطبخ متكامل للاستخدام</li>
+                    <li>شواية مخصصة للشوي والجلسات</li>
+                    <li>يتوفر تأجير بقي برسوم إضافية</li>
+                </ul>
+                <p style="margin-top: 15px; text-align: center; color: var(--accent-color); font-weight: bold;">مناسب للعائلات والجلسات الهادئة، مع أجواء مرتبة ومريحة للجميع 🤍</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">💰 الأسعار</div>
+            <div class="accordion-content">
+                <ul>
+                    <li><strong>📅 أيام الأسبوع:</strong> 30 د.ك</li>
+                    <li><strong>🎉 الويكند:</strong> 35 د.ك</li>
+                    <li><strong>🔐 التأمين:</strong> 50 د.ك <span style="font-size: 13px; color: #7a706e;">(مسترجع بعد التأكد من سلامة ونظافة المخيم)</span></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 لـ The Nomad KW</p>
+        <p style="font-size: 11px; margin-top: 5px; color: #b5aaa6;">تم التطوير وإدارة المنصة رسميًا</p>
+        
+        <span class="admin-trigger" onclick="openAdminPanel()">لوحة الموظفين</span>
+
+        <div class="admin-panel" id="adminPanel">
+            <h3>📊 لوحة تحكم الموظفين والمدخول</h3>
+            <div class="admin-grid">
+                <div class="stat-card">
+                    <h4>عدد زوار الموقع الإجمالي</h4>
+                    <p id="visitorCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>إجمالي الحجوزات الحالية</h4>
+                    <p>8 حجوزات</p>
+                </div>
+                <div class="stat-card">
+                    <h4>إجمالي الدخل المتوقع</h4>
+                    <p>265 د.ك</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+        }
+
+        function goToHome() {
+            const items = document.querySelectorAll('.accordion-item');
+            items.forEach(item => {
+                item.classList.remove('active');
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function copyRules() {
+            const rulesText = `شروط وتعليمات المخيم:\n` + 
+                `• نرجو المحافظة على نظافة المخيم والمرافق\n` +
+                `• الالتزام بالهدوء واحترام المخيمات المجاورة\n` +
+                `• يمنع دخول أشخاص غير مضافين بالحجز\n` +
+                `• المحافظة على الأثاث والتجهيزات مسؤولية المستأجر\n` +
+                `• أي تلفيات أو فقدان يتم تعويضها حسب الضرر\n` +
+                `• الالتزام بوقت الدخول والخروج المحدد\n` +
+                `• يمنع العبث بالكهرباء أو معدات السلامة\n` +
+                `• استخدام مرافق المخيم يكون بشكل مسؤول وآمن\n` +
+                `• يمنع ترك النفايات أو مخلفات الفحم بعد المغادرة\n` +
+                `• الإدارة تحتفظ بحق إنهاء الحجز عند مخالفة التعليمات\n` +
+                `نتمنى لكم إقامة ممتعة ووقتًا جميلًا في المخيم 🤍`;
+
+            navigator.clipboard.writeText(rulesText).then(() => {
+                alert('تم نسخ القوانين بنجاح بقائمة الحافظة لديك!');
+            }).catch(err => {
+                alert('عذراً، حدث خطأ أثناء محاولة النسخ.');
+            });
+        }
+
+        let currentVisits = localStorage.getItem('nomad_camp_visits') || 142;
+        currentVisits = parseInt(currentVisits) + 1;
+        localStorage.setItem('nomad_camp_visits', currentVisits);
+        document.getElementById('visitorCount').innerText = currentVisits;
+
+        function openAdminPanel() {
+            const password = prompt("الرجاء إدخال كلمة مرور الموظفين للاطلاع على الحجوزات والمدخول:");
+            if (password === "Alinasser") {
+                const panel = document.getElementById('adminPanel');
+                panel.style.display = "block";
+                panel.scrollIntoView({ behavior: 'smooth' });
+            } else if (password !== null) {
+                alert("كلمة المرور خاطئة! غير مسموح لك بالدخول.");
+            }
+        }
+    </script>
+</body>
+</html>
